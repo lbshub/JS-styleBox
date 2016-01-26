@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>老虎机-九宫格抽奖</title>
+	<style type="text/css">
+	*{ margin:0; padding:0;}
+	#lhjBox{ width:600px; height:300px; position: relative; margin:10px 20px; overflow:hidden;}
+	#lhjBox div{ width:200px; height:100px; position: absolute; text-align:center; background:#F00; color:#FFF; font:700 30px/100px 'Microsoft Yahei';}
+	#lhjBox div.a1{left: 0; top: 0;}
+	#lhjBox div.a2{left: 200px; top: 0;}
+	#lhjBox div.a3{left: 400px; top: 0;}
+	#lhjBox div.a4{left: 400px; top: 100px;}
+	#lhjBox div.a5{left: 400px; top: 200px;}
+	#lhjBox div.a6{left: 200px; top: 200px;}
+	#lhjBox div.a7{left: 0; top: 200px;}
+	#lhjBox div.a8{left: 0; top: 100px;}
+	#lhjBox div.a0{left: 200px; top: 100px; background:#90F;}
+	#lhjBox div.current{ background:#0CF;}
+	</style>
+
+</head>
+<body>
+	
+<div id="wrapBox">
+	<div id="lhjBox">
+		<div id="start" class="a0">开始抽奖</div>
+		<div id="A1" class="a1">1</div>
+		<div id="A2" class="a2">2</div>
+		<div id="A3" class="a3">3</div>
+		<div id="A4" class="a4">4</div>
+		<div id="A5" class="a5">5</div>
+		<div id="A6" class="a6">6</div>
+		<div id="A7" class="a7">7</div>
+		<div id="A8" class="a8">8</div>
+	</div>
+</div>
+
+<!-- 加载 mTips start -->
+<link rel="stylesheet" type="text/css" href="js/Tips/mTips.css" />
+<script type="text/javascript" src="js/Tips/mTips.min.js"></script>
+<!-- 加载 mTips end -->
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript" src="styleBox.js" ></script>
+
+<script type="text/javascript">
+//缩放
+scalePage('#wrapBox');
+
+//抽奖
+var startBtn = document.getElementById('start'),
+	animated = true,
+	lhj = new styleBox({
+		idPart: 'A',
+		idDigit: 1,
+		length: 8
+	});
+startBtn.onclick = function() {
+	if (!animated) return;
+	animated = false;
+	console.time('计时');
+	var ZJid = (Math.random() * 8) >> 0;
+	// console.log(ZJid);
+	startBtn.innerHTML = '抽奖中...';
+	lhj.start(ZJid, function() {
+		console.timeEnd('计时');
+		animated = true;
+		startBtn.innerHTML = '继续抽奖';
+		Tips.alert(ZJid + ' 恭喜你中奖了！');
+	});
+};
+
+</script>
+
+</body>
+</html>
