@@ -44,7 +44,7 @@
 <link rel="stylesheet" type="text/css" href="js/Tips/mTips.css" />
 <script type="text/javascript" src="js/Tips/mTips.min.js"></script>
 <script type="text/javascript" src="js/utils.js"></script>
-<script type="text/javascript" src="styleBox.min.js" ></script>
+<script type="text/javascript" src="styleBox.old.js" ></script>
 
 <script type="text/javascript">
 //缩放
@@ -56,23 +56,20 @@ var startBtn = document.getElementById('start'),
 	lhj = new styleBox({
 		idPart: 'A',
 		idDigit: 1,
-		length: 8,
-		count: 8,
-		duration: 5000,
-		easing: 'easeInOutCirc'
+		length: 8
 	});
 startBtn.onclick = function() {
 	if (!animated) return;
 	animated = false;
 	console.time('计时');
-	var index = (Math.random() * 8) >> 0;
-	// console.log(index);
+	var ZJid = (Math.random() * 8) >> 0;
+	// console.log(ZJid);
 	startBtn.innerHTML = '抽奖中...';
-	lhj.start(index, function() {
+	lhj.start(ZJid, function() {
 		console.timeEnd('计时');
 		animated = true;
 		startBtn.innerHTML = '继续抽奖';
-		Tips.alert(index + ' 恭喜你中奖了！');
+		Tips.alert(ZJid + ' 恭喜你中奖了！');
 	});
 };
 
